@@ -2,9 +2,17 @@
 
 Komunitní jazykový balíček, který přeloží rozhraní [Orcy](https://onorca.dev) do češtiny. Balíček obsahuje jen data (`"execution": "data"`), nespouští žádný kód.
 
-## Instalace (lokálně, ze složky)
+## Instalace z GitHubu
 
-1. Stáhni nebo naklonuj tuto složku na disk, např. `~/Projekty/orca-czech`.
+```bash
+orca plugin install tomasmarik-sys/orca-czech
+```
+
+Nebo v Orce: **Settings → Plugins → Add plugin**, zvol instalaci z Gitu a zadej `tomasmarik-sys/orca-czech`. Orca nainstaluje nejnovější označenou verzi (tag `vX.Y.Z`). Balíček obsahuje jen překlady, takže se zapne bez schvalování. Pak v **Settings → Appearance → Language** vyber **čeština**.
+
+## Instalace pro vývoj (ze složky)
+
+1. Naklonuj repozitář na disk: `git clone https://github.com/tomasmarik-sys/orca-czech.git`.
 2. V Orce otevři **Settings → Plugins → Development** (Vývoj).
 3. Klikni na **Add path** a zadej cestu ke složce `orca-czech` (tu, ve které je `orca-plugin.json`).
 4. Potvrď kontrolu pluginu a zapni ho.
