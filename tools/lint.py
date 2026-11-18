@@ -1,6 +1,6 @@
 """Kontrola hotového locales/cs.json: technická pravidla Orcy + styl podle STYLE.md.
 
-Použití: python3 -I tools/lint.py [--verbose] [--orca /Applications/Orca.app]
+Použití: python3 -I tools/lint.py [--verbose] [--orca /Applications/Orca.app] [--write-allow]
 Návratový kód: 0 = bez chyb (varování nevadí), 1 = chyby.
 
 CHYBY (blokují commit):
@@ -15,6 +15,7 @@ VAROVÁNÍ (k ruční kontrole):
   - různé anglické texty ve stejné komponentě se stejným překladem
   - předložka před proměnnou s názvem aplikace/služby („v {{app}}“)
   - víceslovný text shodný s angličtinou
+Prověřená varování jsou v tools/lint-allow.json a nehlásí se; --write-allow je tam zapíše všechna aktuální.
 """
 import collections
 import json
@@ -84,7 +85,7 @@ for k, v in cs.items():
     if is_protected(k):
         errors["chráněný klíč (seznam balíčku)"].append(k)
     elif live and live_protected(k):
-        warnings["chráněný v nainstalované Orce (zobrazí se anglicky)"].append(k)
+        warnings["chráněný v nainstalované Orce (zobrazí se anglicky)"].append((k, k))
 
 # --- vykání ------------------------------------------------------------------
 VY_RE = re.compile(r"\b(Vy|vy|vás|vám|vámi|váš|vaše|vaši|vašeho|vašem|vašich)\b|\b[a-zá-ž]{3,}(ete|ěte|íte|ujte)\b", re.I)
@@ -138,20 +139,20 @@ for k, v in cs.items():
 for parent, by_cs in groups.items():
     for v, ens in by_cs.items():
         if len(ens) > 1:
-            warnings["stejný překlad pro různé texty v jedné komponentě"].append(f"{parent}: „{v}“ ← {sorted(ens)}")
+            warnings["stejný překlad pro různé texty v jedné komponentě"].append((f"{parent} = {v}", f"{parent}: „{v}“ ← {sorted(ens)}"))
 
 # --- varování: předložka před názvem aplikace ------------------------------------
 APP_VAR = r"\{\{(app|appName|editor|ide|browser|source|tool|provider|service|integration)\}\}"
 PREP_RE = re.compile(r"(?<![\w{])(v|ve|s|se|z|ze|k|ke|do|na|pro) " + APP_VAR)
 for k, v in cs.items():
     if PREP_RE.search(v):
-        warnings["předložka před názvem aplikace/služby (skloňování, „v VS Code“)"].append(f"{k}: „{v[:70]}“")
+        warnings["předložka před názvem aplikace/služby (skloňování, „v VS Code“)"].append((k, f"{k}: „{v[:70]}“"))
 
 # --- varování: text shodný s angličtinou -----------------------------------------
 CODEISH = re.compile(r"[`$@{}<>=/\\;|]|^\s*(git|gh|npm|pnpm|yarn|orca|claude|codex|cd|ls)\b|--\w")
 for k, v in cs.items():
     if k in en and v == en[k] and re.search(r"[A-Za-z]{3,} [a-z]{3,}", v) and not CODEISH.search(v):
-        warnings["víceslovný text shodný s angličtinou"].append(f"{k}: „{v[:60]}“")
+        warnings["víceslovný text shodný s angličtinou"].append((k, f"{k}: „{v[:60]}“"))
 
 # --- výstup --------------------------------------------------------------------
 
@@ -165,9 +166,32 @@ def report(title, bucket, limit):
             print(f"    … a dalších {len(items) - limit} (--verbose)")
 
 
+# --- prověřená varování (tools/lint-allow.json) -----------------------------------
+ALLOW_PATH = os.path.join(ROOT, "tools", "lint-allow.json")
+if "--write-allow" in sys.argv:
+    allow_out = {cat: sorted(i for i, _ in items) for cat, items in warnings.items()}
+    with open(ALLOW_PATH, "w", encoding="utf-8") as f:
+        json.dump({"_poznamka": "Prověřená varování lintu, která jsou v pořádku. Nová varování se hlásí dál. "
+                   "Přegenerování: python3 -I tools/lint.py --write-allow (jen po ruční kontrole!)", **allow_out},
+                  f, ensure_ascii=False, indent=1)
+        f.write("\n")
+    print(f"zapsáno {sum(len(v) for v in allow_out.values())} prověřených varování do tools/lint-allow.json")
+allowed = {}
+if os.path.exists(ALLOW_PATH):
+    allowed = {k: set(v) for k, v in load_json(ALLOW_PATH).items() if not k.startswith("_")}
+n_allowed = 0
+for cat in list(warnings):
+    keep = [(i, m) for i, m in warnings[cat] if i not in allowed.get(cat, set())]
+    n_allowed += len(warnings[cat]) - len(keep)
+    warnings[cat] = [m for _, m in keep]
+    if not warnings[cat]:
+        del warnings[cat]
+stale = sum(len(v) for v in allowed.values()) - n_allowed
+
 print(f"lint cs.json: {len(cs)} záznamů" + ("" if live else f" (Orca v {ORCA_APP} nenalezena, kontrola proti ní vynechána)"))
 report("CHYBA", errors, 20)
 report("varování", warnings, 5)
 n_err = sum(len(v) for v in errors.values())
+print(f"prověřená varování (tools/lint-allow.json): {n_allowed}" + (f", zastaralých položek: {stale}" if stale else ""))
 print("výsledek:", "OK" if not n_err else f"{n_err} chyb")
 sys.exit(1 if n_err else 0)

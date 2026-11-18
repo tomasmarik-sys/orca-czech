@@ -9,6 +9,7 @@
   "dashboardPopout.filters.review.open": "Otevřený",
   "menu.zoom": "Přepnout velikost",
   "auto.main.window.editableContextMenu.insert": "Vložit prvek",
+  "components.native-chat.tool.row.read": "Přečteno",
   "auto.lib.local.file.manager.label.85cc2c844c": "Otevřít v aplikaci {{name}}",
   "auto.components.right.sidebar.FileExplorerToolbar.openInApp": "Otevřít v aplikaci {{app}}",
   "components.native-chat.connectorAsker.open": "Otevřít ve službě {{source}}",

@@ -37,6 +37,8 @@ python3 -I tools/lint.py            # --verbose vypíše všechna varování
 
 Lint kontroluje hotový `locales/cs.json`. **Chyby** (blokují commit): pravidla Orcy, chráněné klíče, vykání, trojtečka jinak než v angličtině, neúplný plurál, záměna Remove/Delete („Odebrat“/„Smazat“), override neprojevený v `cs.json`. **Varování** (k ruční kontrole): klíče chráněné v nainstalované Orce, stejný překlad pro různé texty v jedné komponentě, předložka před názvem aplikace nebo služby („v {{app}}“), víceslovný text shodný s angličtinou.
 
+Prověřená varování, která jsou v pořádku, jsou v `tools/lint-allow.json` a lint je už nehlásí. Po aktualizaci Orcy se tak ukážou jen nová. Když nová varování projdeš a jsou v pořádku, ulož je přes `python3 -I tools/lint.py --write-allow`.
+
 ### Git hook
 
 Před každým commitem se spustí lint a `orca plugin validate`. Po naklonování ho zapni jednou příkazem:
