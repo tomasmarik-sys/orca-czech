@@ -1,0 +1,21 @@
+{
+  "manifestVersion": 2,
+  "id": "czech",
+  "name": "Český jazykový balíček",
+  "version": "0.1.1",
+  "license": "MIT",
+  "description": "Přeloží rozhraní Orcy do češtiny.",
+  "engines": {
+    "orca": ">=1.4.246"
+  },
+  "execution": "data",
+  "contributes": {
+    "languagePacks": [
+      {
+        "locale": "cs",
+        "path": "locales/cs.json",
+        "displayName": "Čeština"
+      }
+    ]
+  }
+}
