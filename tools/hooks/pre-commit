@@ -1,0 +1,23 @@
+#!/bin/sh
+# Kontrola před commitem: lint katalogu + oficiální validátor Orcy.
+# Zapnutí (jednou po naklonování): git config core.hooksPath tools/hooks
+# Obejití v nouzi: git commit --no-verify
+set -e
+ROOT=$(git rev-parse --show-toplevel)
+cd "$ROOT"
+
+# Kontroluje soubory v pracovní složce: neukládej do commitu jen část změn.
+if ! git diff --quiet -- locales tools orca-plugin.json; then
+  echo "pre-commit: v locales/, tools/ nebo orca-plugin.json jsou nepřidané změny; přidej je (git add) nebo je odlož (git stash -k)." >&2
+  exit 1
+fi
+
+python3 -I tools/lint.py
+
+ORCA=${ORCA_CLI:-/Applications/Orca.app/Contents/Resources/bin/orca}
+if [ -x "$ORCA" ]; then
+  "$ORCA" plugin validate . >/dev/null || { "$ORCA" plugin validate .; exit 1; }
+  echo "orca plugin validate: ok"
+else
+  echo "pre-commit: Orca CLI nenalezeno ($ORCA), validátor přeskočen."
+fi
