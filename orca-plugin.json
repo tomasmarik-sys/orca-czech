@@ -2,7 +2,7 @@
   "manifestVersion": 2,
   "id": "czech",
   "name": "Český jazykový balíček",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "description": "Přeloží rozhraní Orcy do češtiny.",
   "engines": {

@@ -1,9 +1,5 @@
 {
  "_poznamka": "Prověřená varování lintu, která jsou v pořádku. Nová varování se hlásí dál. Přegenerování: python3 -I tools/lint.py --write-allow (jen po ruční kontrole!)",
- "chráněný v nainstalované Orce (zobrazí se anglicky)": [
-  "components.settings.workspaceCleanup.chatHistory.title",
-  "components.settings.workspaceCleanup.rules.recommended"
- ],
  "stejný překlad pro různé texty v jedné komponentě": [
   "auto.components.PullRequestPage = Otevřít na GitHubu",
   "auto.components.TaskPage = MR",

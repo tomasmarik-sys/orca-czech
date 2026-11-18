@@ -53,8 +53,8 @@ Automaticky nejde poznat, jestli je text tlačítko, nebo stav („Otevřít“ 
 
 ## Aktualizace po nové verzi Orcy
 
-1. Stáhni nový anglický katalog ze zdrojáků Orcy (`src/renderer/src/i18n/locales/en.json` v repozitáři stablyai/orca).
-2. `python3 -I tools/update.py /cesta/k/en.json`: odstraní zastaralé překlady a uloží nový zdroj.
+1. Stáhni anglický katalog vydané verze (tag, např. `v1.4.263`) i větve main ze zdrojáků Orcy (`src/renderer/src/i18n/locales/en.json` v repozitáři stablyai/orca, příkazy jsou v `tools/merge_en.py`) a slouč je: `python3 -I tools/merge_en.py en-release.json en-main.json en-merged.json`.
+2. `python3 -I tools/update.py en-merged.json`: odstraní zastaralé překlady a uloží nový zdroj. Do `tools/protected-copy-keys.json` doplň chráněné klíče vydané Orcy (`/Applications/Orca.app/Contents/Resources/app.asar.unpacked/out/shared/plugins/languages/protected-copy-keys.json`) a překlady klíčů, které se tím staly chráněnými, z `locales/cs.json` odeber.
 3. `python3 -I tools/prep.py 1 --missing-only`: vytvoří dávku jen s novými a změněnými texty.
 4. Přelož `work/batch-00.json` do `work/out-00-01.json` (formát popisuje `tools/check_batch.py`), zkontroluj přes `python3 -I tools/check_batch.py 00`.
 5. `python3 -I tools/assemble.py --merge` a zvyš `version` v `orca-plugin.json`.
@@ -62,7 +62,7 @@ Automaticky nejde poznat, jestli je text tlačítko, nebo stav („Otevřít“ 
 
 ## Zdroj překladu
 
-Výchozí anglický katalog: stablyai/orca, commit `cd83a24` (18. 11. 2026). Překlad vznikl strojově s pomocí Claude podle `STYLE.md` a prochází lidskou revizí.
+Anglický katalog (`tools/en.json`) je sloučení vydané Orcy `v1.4.263` a větve main (commit `d161ce3`, 18. 11. 2026) přes `tools/merge_en.py`. Texty z vydání mají přednost, klíče z main, které zatím nevyšly, jsou přeložené dopředu. Stejně tak `tools/protected-copy-keys.json` je sjednocení seznamu z main a z vydané Orcy. Překlad vznikl strojově s pomocí Claude podle `STYLE.md` a prochází lidskou revizí.
 
 ## Licence
 

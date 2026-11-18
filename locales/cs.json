@@ -3003,7 +3003,7 @@
           "ContextualTourOverlaySurface": {
             "4a9568f773": "Zpět",
             "4f86e2a10b": "Přeskočit prohlídku",
-            "complete": "Dokončit",
+            "complete": "Hotovo",
             "d974f32a83": "Zavřít prohlídku"
           },
           "ContextualTourProgressDots": {
@@ -9523,7 +9523,7 @@
           "noActiveLinks": "Žádné aktivní odkazy.",
           "olderPairingMethod": "Používá starší způsob párování. Aktualizuj Orcu na zařízení, které tento odkaz používá.",
           "revoke": "Odvolat",
-          "sshAccessCaveat": "Odvoláním odkazu se odvolají i odkazy vytvořené v terminálech, které otevřel. Kdokoli s terminálem na tomto počítači, přes SSH nebo přes odkaz, může stále znovu spárovat."
+          "sshAccessCaveat": "Odvolání tady nezabrání tomu, aby se znovu spároval někdo, kdo má k tomuto počítači přístup přes SSH. Pokud ho chceš odstřihnout, odeber mu přístup přes SSH."
         },
         "RuntimeEnvironmentsPane": {
           "0c55a47480": "Název a párovací kód jsou povinné.",
@@ -13481,6 +13481,7 @@
           "ca3b225195": "Automatické pojmenování větve selhalo",
           "couldNotGenerateBranchName": "Orce se nepodařilo vygenerovat název větve pro <name>{{name}}</name> z první zprávy agenta.",
           "dismiss": "Zavřít",
+          "dismissError": "Zavřít chybu",
           "dismissing": "Zavírání…",
           "eab8b45238": "Kopírovat chybu",
           "errorDetailsAt": "Podrobnosti chyby · {{time}}",
@@ -13692,6 +13693,9 @@
           "wslStoppedTitle": "Distribuce WSL {{value0}} je zastavená",
           "wslUnverifiableTitle": "Nepodařilo se ověřit, že distribuce WSL {{value0}} běží",
           "xcodeLicense": "Vývojářské nástroje od Applu vyžadují před spuštěním Gitu přijetí licence."
+        },
+        "ScrollToCurrentWorkspaceToolbarButton": {
+          "23989bb663": "Zobrazit aktivní pracovní prostor"
         },
         "SetupGuideSidebarEntry": {
           "88d402b71d": "Úvodní kontrolní seznam",
@@ -14797,6 +14801,8 @@
           "opening": "Otevírání odkazu…"
         },
         "SkillInstallManagementDialog": {
+          "0900db719a": "— odpojeno",
+          "176fef9516": "· SSH",
           "3677ae58e7": "Skilly, které Orca nainstalovala z odkazu. Můžeš je přeinstalovat, vrátit se k dřívější verzi nebo je odebrat.",
           "44d118a8f7": "Nainstalováno Orcou",
           "64c71cf7b9": "Orca na tomto počítači zatím nenainstalovala žádné skilly.",
@@ -14814,8 +14820,10 @@
           "0e5b43a9e3": "Pracovní prostor",
           "5845cfe543": "Vyber worktree nebo složku",
           "63cc9e31fe": "Cíl",
+          "71eefd7660": "— odpojeno",
           "7a366323e7": "Složka",
           "8562dd1e6e": "Tento počítač",
+          "85d85880df": "· SSH",
           "8e6a972229": "Na tomto počítači nejsou známé žádné pracovní prostory.",
           "a4dfd33095": "Jeden pracovní prostor",
           "b8a0b706ad": "Počítač",
@@ -22603,7 +22611,7 @@
           "label": "Chatové rozhraní",
           "noneDetected": "Žádný z nalezených agentů nefunguje v chatovém rozhraní.",
           "recommended": "Doporučeno",
-          "terminalFallback": "Agenti bez podpory chatu se otevřou v terminálu."
+          "terminalFallback": "Agenti bez podpory chatu a složky otevřené na tomto počítači přes SSH nebo WSL se dál otevírají v terminálu."
         },
         "preview": {
           "agentMessage": "Neúspěšné požadavky se teď zkoušejí znovu až třikrát.",
@@ -23110,9 +23118,6 @@
           "running": "Odebírání toho, co odpovídá pravidlům…",
           "runningButton": "Probíhá…"
         },
-        "chatHistory": {
-          "title": "Historie chatů"
-        },
         "description": "Odeber pracovní prostory, které už nepotřebuješ. Než Orca cokoli odebere, znovu zkontroluje neuloženou práci.",
         "keep": {
           "activeWorkspace": "Právě otevřený",
@@ -23177,7 +23182,6 @@
           "matchesCount_many": "Teď odpovídá {{count}} pracovního prostoru",
           "matchesCount_one": "Teď odpovídá 1 pracovní prostor",
           "matchesCount_other": "Teď odpovídá {{count}} pracovních prostorů",
-          "recommended": "Doporučeno",
           "showMatches": "Zobrazit",
           "then": "Potom"
         },

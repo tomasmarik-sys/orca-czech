@@ -6672,7 +6672,9 @@
           "6cb1fbe039": "This computer",
           "3677ae58e7": "Skills Orca installed from a link. Reinstall, go back to an earlier version, or remove them.",
           "44d118a8f7": "Installed by Orca",
-          "dab29e4b54": "{{installed}} installed · {{updated}} updated · {{keptLocal}} kept local"
+          "dab29e4b54": "{{installed}} installed · {{updated}} updated · {{keptLocal}} kept local",
+          "0900db719a": "— disconnected",
+          "176fef9516": "· SSH"
         },
         "SkillInstallReviewContent": {
           "89e2601162": "Discard and replace",
@@ -6704,7 +6706,9 @@
           "63cc9e31fe": "Destination",
           "0785d0a503": "— update required",
           "8562dd1e6e": "This computer",
-          "b8a0b706ad": "Machine"
+          "b8a0b706ad": "Machine",
+          "85d85880df": "· SSH",
+          "71eefd7660": "— disconnected"
         },
         "SkillInstallWorkspaceCombobox": {
           "search": "Search workspaces...",
@@ -7186,7 +7190,8 @@
           "reasonFirstMessageUnavailable": "Orca couldn't find this workspace's first message.",
           "reasonAlreadyNamed": "This workspace was already renamed.",
           "reasonUnavailable": "Orca can't name this branch anymore.",
-          "branchNameKept": "Branch name kept"
+          "branchNameKept": "Branch name kept",
+          "dismissError": "Dismiss error"
         },
         "CreateProjectLocationField": {
           "95548e33bf": "Choose parent folder...",
@@ -8546,6 +8551,9 @@
           "browseFolder": "Browse folder…",
           "cloneFromUrl": "Clone from URL…",
           "createNewProject": "Create new project…"
+        },
+        "ScrollToCurrentWorkspaceToolbarButton": {
+          "23989bb663": "Reveal active workspace"
         }
       },
       "shared": {
@@ -10009,7 +10017,7 @@
           "112f3b934f": "Source control AI"
         },
         "RuntimeAccessGrantList": {
-          "sshAccessCaveat": "Revoking a link also revokes links made in terminals it opened. Anyone with a terminal on this computer, over SSH or through a link, can still pair again.",
+          "sshAccessCaveat": "Revoking here doesn't stop someone with SSH access to this computer from pairing again. To cut them off, remove their SSH access.",
           "6f6d5188ed": "Revoke {{value0}}",
           "434e4a6af6": "Current link",
           "df142657a5": "Not used yet",
@@ -18534,7 +18542,7 @@
             "4a9568f773": "Back",
             "4f86e2a10b": "Skip tour",
             "d974f32a83": "Dismiss tour",
-            "complete": "Finish"
+            "complete": "Done"
           },
           "ContextualTourProgressDots": {
             "dcd6e6b03e": "Step {{value0}} of {{value1}}",
@@ -20813,7 +20821,7 @@
           "label": "Chat UI",
           "description": "Agents reply in a chat, with rendered messages and diffs.",
           "recommended": "Recommended",
-          "terminalFallback": "Agents without chat support fall back to a terminal.",
+          "terminalFallback": "Agents without chat support and folders opened through SSH or WSL on this computer still open in a terminal.",
           "noneDetected": "None of your detected agents work in Chat UI."
         },
         "terminal": {
@@ -23311,7 +23319,10 @@
           "automaticDescription": "Whether automatic cleanup is on, when it runs next, and running the rules now.",
           "runRulesNow": "run rules now",
           "cleanUpNow": "clean up now",
-          "schedule": "schedule"
+          "schedule": "schedule",
+          "chat": "chat",
+          "transcripts": "transcripts",
+          "diskSpace": "disk space"
         },
         "status": {
           "lastRunFailed": "Last run {{when}} couldn't finish: {{error}}",
@@ -23357,7 +23368,13 @@
           "label": "Pin and keep"
         },
         "chatHistory": {
-          "title": "Chat history"
+          "title": "Chat history",
+          "updateFailed": "Couldn't update the setting on {{host}}.",
+          "unsupported": "Update Orca on {{host}} to use this setting there.",
+          "confirmTitle": "Delete chat history from deleted workspaces?",
+          "confirmDescription": "Orca will delete Orca, Claude Code and Codex chats from workspaces that no longer exist, including ones deleted before today. Chats from workspaces you still have are kept. Deleted chats can't be recovered.",
+          "deleteWithWorkspace": "Delete chat history with the workspace",
+          "deleteWithWorkspaceDescription": "Orca, Claude Code and Codex chats from deleted workspaces are removed automatically to free disk space. They can't be recovered."
         },
         "manual": {
           "title": "Manual cleanup",
